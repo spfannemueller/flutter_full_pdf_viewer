@@ -1,10 +1,15 @@
 package com.alveliu.flutterfullpdfviewer;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnDrawListener;
+import com.github.barteksc.pdfviewer.util.FitPolicy;
 
 import java.io.File;
 
@@ -23,11 +28,19 @@ class FlutterFullPdfViewerManager {
     FlutterFullPdfViewerManager (final Activity activity) {
         this.pdfView = new PDFView(activity, null);
         this.activity = activity;
+
     }
 
     void openPDF(String path) {
+
+        pdfView.setBackgroundColor(Color.parseColor("#4d4d4d"));
+
+
+
         File file = new File(path);
         pdfView.fromFile(file)
+                .spacing(30)
+                .pageFitPolicy(FitPolicy.BOTH)
                 .enableSwipe(true)
                 .swipeHorizontal(false)
                 .enableDoubletap(true)
@@ -37,6 +50,7 @@ class FlutterFullPdfViewerManager {
 
     void resize(FrameLayout.LayoutParams params) {
         pdfView.setLayoutParams(params);
+
     }
 
     void close(MethodCall call, MethodChannel.Result result) {
@@ -56,4 +70,6 @@ class FlutterFullPdfViewerManager {
     void close() {
         close(null, null);
     }
+
+
 }

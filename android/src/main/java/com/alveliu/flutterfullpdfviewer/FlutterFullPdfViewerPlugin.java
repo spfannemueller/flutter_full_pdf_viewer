@@ -62,6 +62,7 @@ public class FlutterFullPdfViewerPlugin implements MethodCallHandler, PluginRegi
             flutterFullPdfViewerManager = new FlutterFullPdfViewerManager(activity);
         }
         FrameLayout.LayoutParams params = buildLayoutParams(call);
+
         activity.addContentView(flutterFullPdfViewerManager.pdfView, params);
         flutterFullPdfViewerManager.openPDF(path);
         result.success(null);
@@ -88,6 +89,7 @@ public class FlutterFullPdfViewerPlugin implements MethodCallHandler, PluginRegi
         if (rc != null) {
             params = new FrameLayout.LayoutParams(dp2px(activity, rc.get("width").intValue()), dp2px(activity, rc.get("height").intValue()));
             params.setMargins(dp2px(activity, rc.get("left").intValue()), dp2px(activity, rc.get("top").intValue()), 0, 0);
+
         } else {
             Display display = activity.getWindowManager().getDefaultDisplay();
             Point size = new Point();
